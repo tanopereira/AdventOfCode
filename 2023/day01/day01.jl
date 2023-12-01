@@ -10,8 +10,6 @@ end
 
 p1=part1(input)
 
-
-
 function part2(input)
     d=Dict("one" => "1",
     "two" => "2",
@@ -29,3 +27,8 @@ function part2(input)
     end
     return s
 end
+
+p2=part2(input)
+
+println("Part1: $p1")
+println("Part2: $p2")
