@@ -40,16 +40,12 @@ function create_dict_p2(input)
         rowmax=min(i+1,Mrow)
         for m in pot
             n=parse(Int,input[i][m])
-            #println("$i $n")
             colmin=max(1,first(m)-1)
             colmax=min(last(m)+1,Mcol)
             for row in rowmin:rowmax
                 for col in colmin:colmax
-                    #println("$y $x $(M[y,x])")
                     if M[row,col]=='*'
-                        #println(y," ",x)
                         haskey(d,(row,col)) ? d[(row,col)]=[d[(row,col)];n] : d[(row,col)]=[n]
-                        #println(d)
                     end
                 end
             end
