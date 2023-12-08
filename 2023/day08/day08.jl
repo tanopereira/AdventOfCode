@@ -42,12 +42,12 @@ function part2_1(instructions, map, start_node, end_node_letter)
     return current_node,i
 end
 
-function part2(instructions, map, start_node_letter, end_node_letter)
+function part2(instructions, map, start_node_letter, end_node_letter) 
     c=[k for k in keys(map) if last(k)==start_node_letter]
     res=[part2_1(instructions,map,node,end_node_letter) for node in c]
     v=[r[2] for r in res]
     return lcm(v)
 end
-
+#this works because I did some checking that every path was cyclical with the same number of steps as the one calculated in part1
 @time p2=part2(instructions,map,'A','Z')
 println("Part2: $p2")
