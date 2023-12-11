@@ -1,8 +1,8 @@
 input=reduce(hcat,collect.(readlines("input.txt"))) |> permutedims
 
 function mydist(x,y,empty_rows,empty_cols,value) #value is the number of rows added due to expansion
-    rows=collect(min(x[1],y[1]):max(x[1],y[1]))
-    cols=collect(min(x[2],y[2]):max(x[2],y[2]))
+    rows=min(x[1],y[1]):max(x[1],y[1])
+    cols=min(x[2],y[2]):max(x[2],y[2])
     return abs(x[1]-y[1])+abs(x[2]-y[2])+(length(intersect(rows,empty_rows))+length(intersect(cols,empty_cols)))*value
 end
     
