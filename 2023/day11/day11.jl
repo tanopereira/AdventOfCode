@@ -18,7 +18,7 @@ function part1(input,value)
     end
     s=0
     for i in 1:length(galaxies)-1
-        for j in i:length(galaxies)
+        for j in i+1:length(galaxies)
             s+=mydist(galaxies[i],galaxies[j],empty_rows,empty_cols,value)
         end
     end
