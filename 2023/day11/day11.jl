@@ -3,7 +3,7 @@ input=reduce(hcat,collect.(readlines("input.txt"))) |> permutedims
 function mydist(x,y,empty_rows,empty_cols,value) #value is the number of rows added due to expansion
     rows=collect(min(x[1],y[1]):max(x[1],y[1]))
     cols=collect(min(x[2],y[2]):max(x[2],y[2]))
-    return cityblock(x,y)+(length(intersect(rows,empty_rows))+length(intersect(cols,empty_cols)))*value
+    return abs(x[1]-y[1])+abs(x[2]-y[2])+(length(intersect(rows,empty_rows))+length(intersect(cols,empty_cols)))*value
 end
     
 function part1(input,value)
@@ -27,3 +27,5 @@ end
 
 @time p1=part1(input,1)
 @time p2=part1(input,999999)
+println("Part1: $p1")
+println("Part2: $p2")
