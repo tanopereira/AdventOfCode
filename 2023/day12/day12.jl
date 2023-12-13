@@ -43,7 +43,7 @@ function find_pots(line)
     return res
 end
 
-function part1(input)
+function part1_old(input)
     return sum([length(find_pots(line)) for line in input])
 end
 
