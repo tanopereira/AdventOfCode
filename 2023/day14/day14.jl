@@ -95,7 +95,7 @@ end
 
 function part2(input)
     M=input
-    for i in 1:1000000000
+    for i in 1:1000
         M=cycle(M)
         println("$i, $(load(M))")
     end
