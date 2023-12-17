@@ -11,12 +11,12 @@ function part1(input,start_pos,start_dir)
     directions=Dict('U'=>[-1,0],'D'=>[1,0],'L'=>[0,-1],'R'=>[0,1])
     beams=[]
     push!(beams,[[start_pos] start_dir])
-    #seen=Set()
-    seen_with_direction=[]
+    seen=Set()
+    seen_with_direction=Set()
     while !isempty(beams)
         #println(beams)
-        cur_pos,cur_dir=popfirst!(beams)
-        #push!(seen,cur_pos)
+        cur_pos,cur_dir=pop!(beams)
+        push!(seen,cur_pos)
         push!(seen_with_direction,[[cur_pos] cur_dir])
         #println(length(seen))
 
@@ -24,7 +24,7 @@ function part1(input,start_pos,start_dir)
             dir=cur_dir
             pot_pos=cur_pos+directions[dir]
             if valid(input,pot_pos)
-                !in([[pot_pos] dir],seen_with_direction) ? push!(beams,[[pot_pos] dir]) : nothing
+                push!(beams,[[pot_pos] dir]) 
             end
         elseif input[cur_pos...]=='|'
             if cur_dir=='U' || cur_dir=='D'
@@ -86,7 +86,7 @@ function part1(input,start_pos,start_dir)
             end
         end
     end
-    return length(unique([x[1] for x in seen_with_direction]))
+    return length(seen)
 end
 
 function part2(input)
@@ -100,8 +100,12 @@ function part2(input)
         pot>=res ? res=pot : nothing
         pot=part1(input,[110,i],'U')
         pot>=res ? res=pot : nothing
-        println("$i $res")
     end
     return res
 end
 
+@time p1=part1(input,[1,1],'R')
+println("Part1: $p1")
+
+@time p2=part2(input)
+println("Part2: $p2")
