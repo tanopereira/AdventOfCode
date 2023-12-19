@@ -56,13 +56,13 @@ println("Part1: $p1")
 
 function range_instructions(d,name,range_dict)
     q=[]
-    res=[]
+    res=0
     push!(q,(name,range_dict))
     while !isempty(q)
         name,range_dict=popfirst!(q)
         #println("Name: $name, Length_queue:$(length(q))")
         if name=="A" 
-            push!(res,BigInt(length(range_dict['x'])*length(range_dict['m'])*length(range_dict['a'])*length(range_dict['s'])))
+            res+=BigInt(length(range_dict['x'])*length(range_dict['m'])*length(range_dict['a'])*length(range_dict['s']))
             #println("Sum so far: $(sum(res))")
             continue
         end
@@ -93,7 +93,7 @@ function range_instructions(d,name,range_dict)
             end
         end
     end
-    return sum(res)
+    return res
 end
 
 function part2(input)
