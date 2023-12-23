@@ -63,6 +63,8 @@ function part1(input)
     return count
 end
 
+println("Part 1: $(part1(input))")
+
 function part2(input)
     q=create_bricks(input)
     q=sort(q,lt=(x,y)->x[3]<y[3])
@@ -79,3 +81,5 @@ function part2(input)
     end
     return s
 end
+
+println("Part 2: $(part2(input))")
