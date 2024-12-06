@@ -42,9 +42,10 @@ function part1(input)
 end
 
 @time p1=part1(input)
+println(p1)
 
 input2=copy(input);
 input2[55]="$p1 -> b";
 
 @time p2=part1(input2)
-
+println(p2)

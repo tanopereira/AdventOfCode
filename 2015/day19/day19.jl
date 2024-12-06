@@ -14,8 +14,8 @@ function part1(transformations,molecule)
         if !isempty(fs)
             for f in fs
                 F=collect(f)
-                if length(F)==1 
-                    n1=n2=F[1] 
+                if length(F)==1
+                    n1=n2=F[1]
                 else 
                     n1,n2=F[1],F[end]
                 end
@@ -37,8 +37,8 @@ function part2_1(transformations,molecule) #reverse transform
         if !isempty(fs)
             for f in fs
                 F=collect(f)
-                if length(F)==1 
-                    n1=n2=F[1] 
+                if length(F)==1
+                    n1=n2=F[1]
                 else 
                     n1,n2=F[1],F[end]
                 end
@@ -65,7 +65,7 @@ function part2_2(transformations,start_mol,end_mol)
             end
         end
         #res=Set()
-        for i in 1:min(length(res2),16)  #keep the first 16 only (works!) 
+        for i in 1:min(length(res2),16)  #keep the first 16 only (works!)
             push!(res,dequeue!(res2))
         end
         #println(i, " ", length(res))
@@ -74,3 +74,4 @@ function part2_2(transformations,start_mol,end_mol)
 end
 
 @time p2=part2_2(transformations,molecule,"e")[1]
+

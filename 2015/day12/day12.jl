@@ -1,6 +1,6 @@
 using JSON
 
-@time input=JSON.parse(read("input.txt",String));
+input=JSON.parse(read("input.txt",String));
 
 
 value(n::Int,_)=n

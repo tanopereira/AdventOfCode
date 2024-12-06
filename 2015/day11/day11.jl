@@ -27,3 +27,4 @@ end
 
 @time p1=next_password(input)
 @time p2=next_password(next_s(p1))
+

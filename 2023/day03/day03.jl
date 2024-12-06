@@ -2,7 +2,7 @@ input=readlines("input.txt")
 
 
 function extract_valid_numbers(i,input)
-    M=reduce(hcat,(reduce(vcat,[collect.(input)]))) |> permutedims
+    M=stack(input,dims=1)
     symbols=filter(x->!occursin(r"\d|\.","$x"),[c for c in unique(M)])
     Mrow,Mcol=size(M)
     res=[]
@@ -26,11 +26,11 @@ function part1(input)
     return s
 end
 
-@time p1=part1(input)
+p1=part1(input)
 println("Part1: $p1")
 
 function create_dict_p2(input)
-    M=reduce(hcat,(reduce(vcat,[collect.(input)]))) |> permutedims
+    M=stack(input,dims=1)
     symbols=filter(x->!occursin(r"\d|\.","$x"),[c for c in unique(M)])
     Mrow,Mcol=size(M)
     d=Dict()
@@ -65,5 +65,5 @@ function part2(input)
     return s
 end
 
-@time p2=part2(input)
+p2=part2(input)
 println("Part2: $p2")
