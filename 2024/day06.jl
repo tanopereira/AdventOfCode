@@ -2,18 +2,20 @@ using Revise, Distributed
 function solve()
 input=stack(readlines("data/input06.txt"))
 
+function isvalid(pos,s1,s2)
+    return 1<=pos[1]<=s1 && 1<=pos[2]<=s2
+end
+
 function part1(input)
     s1,s2=size(input)
-    function isvalid(pos)
-        return 1<=pos[1]<=s1 && 1<=pos[2]<=s2
-    end
+    
     pos=findfirst(==('^'),input)
     dirs=[CartesianIndex(0,-1),CartesianIndex(1,0),CartesianIndex(0,1),CartesianIndex(-1,0)]
     visited=Set{CartesianIndex{2}}()
-    while isvalid(pos)
+    while isvalid(pos,s1,s2)
         push!(visited,pos)
         pot_pos=pos+dirs[1]
-        if isvalid(pot_pos) && input[pot_pos]=='#' 
+        if isvalid(pot_pos,s1,s2) && input[pot_pos]=='#' 
             circshift!(dirs,-1)
         else
             pos=pot_pos
@@ -30,21 +32,17 @@ function part2(M)
     
     pot_obstrs=[CartesianIndex(x) for x in setdiff(Tuple.(p1),[Tuple(findfirst(==('^'),M))])]
     s1,s2=size(M)
-    function isvalid(pos)
-        return 1<=pos[1]<=s1 && 1<=pos[2]<=s2
-    end
     count=0
-    for pot_obstr in pot_obstrs
+    Threads.@threads for pot_obstr in pot_obstrs
         pos=findfirst(==('^'),M)
         dirs=[CartesianIndex(0,-1),CartesianIndex(1,0),CartesianIndex(0,1),CartesianIndex(-1,0)]
         visited=Set()
-        newM=copy(M)
-        newM[pot_obstr]='#'
-        while isvalid(pos)
-            if !in([pos,dirs[1]],visited)
-                push!(visited, [pos,dirs[1]])
+        M[pot_obstr]='#'
+        while isvalid(pos,s1,s2)
+            if !in((pos,dirs[1]),visited)
+                push!(visited, (pos,dirs[1]))
                 pot_pos=pos+dirs[1]
-                if isvalid(pot_pos) && newM[pot_pos]=='#' 
+                if isvalid(pot_pos,s1,s2) && M[pot_pos]=='#' 
                     circshift!(dirs,-1)
                 else
                     pos=pot_pos
@@ -54,6 +52,7 @@ function part2(M)
                 break
             end
         end
+        M[pot_obstr]='.'
     end
     
     return count
