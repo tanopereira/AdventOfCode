@@ -33,7 +33,7 @@ function part2(M)
     pot_obstrs=[CartesianIndex(x) for x in setdiff(Tuple.(p1),[Tuple(findfirst(==('^'),M))])]
     s1,s2=size(M)
     count=0
-    Threads.@threads for pot_obstr in pot_obstrs
+    for pot_obstr in pot_obstrs
         pos=findfirst(==('^'),M)
         dirs=[CartesianIndex(0,-1),CartesianIndex(1,0),CartesianIndex(0,1),CartesianIndex(-1,0)]
         visited=Set()
